@@ -1,0 +1,15 @@
+from flask import Flask, render_template
+from flask_socketio import socketIO, send
+
+app = Flask(__name__)
+app.config['SECRET'] = "secret!123"
+socketio = socketIO(app, cors_allowed_origins="*") 
+
+
+def handle_message(message):
+    print("Recived message: " + message)
+    if message == "User connected!":
+        send(message, broadcast=True)
+
+
+
